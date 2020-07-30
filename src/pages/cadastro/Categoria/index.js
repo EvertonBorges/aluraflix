@@ -35,7 +35,9 @@ function CadastroCategoria() {
   };
 
   useEffect(() => {
-    const URL = 'http://localhost:8080/categorias';
+    const URL = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://everton-aluraflix.herokuapp.com/categorias';
     fetch(URL).then(async (response) => {
       const categoriasServidor = await response.json();
       setCategorias([...categoriasServidor]);
