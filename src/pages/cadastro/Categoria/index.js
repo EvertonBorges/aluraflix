@@ -5,39 +5,30 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 
-function CadastroCategoria() {
-  const [categorias, setCategorias] = useState([]);
+import useForm from '../../../hooks/useForm';
 
+import config from '../../../config';
+
+function CadastroCategoria() {
   const categoriaInicial = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '#000000',
   };
 
-  const [categoria, setCategoria] = useState(categoriaInicial);
+  const { categoria, handleCategoria, clearForm } = useForm(categoriaInicial);
+
+  const [categorias, setCategorias] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     setCategorias([...categorias, categoria]);
-    setCategoria(categoriaInicial);
-  };
-
-  const handleCategoria = (event) => {
-    const { target } = event;
-    const chave = target.getAttribute('name');
-    const valor = target.value;
-
-    setCategoria({
-      ...categoria,
-      [chave]: valor,
-    });
+    clearForm();
   };
 
   useEffect(() => {
-    const URL = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/categorias'
-      : 'https://everton-aluraflix.herokuapp.com/categorias';
+    const URL = `${config.URL_BACKEND}/categorias`;
     fetch(URL).then(async (response) => {
       const categoriasServidor = await response.json();
       setCategorias([...categoriasServidor]);
@@ -51,10 +42,10 @@ function CadastroCategoria() {
       <form onSubmit={handleSubmit}>
 
         <FormField
-          label="Nome da Categoria"
+          label="Título da Categoria"
           type="text"
-          name="nome"
-          value={categoria.nome}
+          name="titulo"
+          value={categoria.titulo}
           onChange={handleCategoria}
         />
 
@@ -89,7 +80,7 @@ function CadastroCategoria() {
 
       <ul>
         {
-          categorias.map((cat) => <li key={`${cat.nome}`}>{cat.nome}</li>)
+          categorias.map((cat) => <li key={`${cat.titulo}`}>{cat.titulo}</li>)
         }
       </ul>
 
