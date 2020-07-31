@@ -31,7 +31,7 @@ function PageDefault({ children, paddingAll }) {
 }
 
 PageDefault.defaultProps = {
-  paddingAll: '8',
+  paddingAll: 8,
 };
 
 PageDefault.propTypes = {

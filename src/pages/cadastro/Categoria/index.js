@@ -16,14 +16,14 @@ function CadastroCategoria() {
     cor: '#000000',
   };
 
-  const { categoria, handleCategoria, clearForm } = useForm(categoriaInicial);
+  const { values, handleChange, clearForm } = useForm(categoriaInicial);
 
   const [categorias, setCategorias] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setCategorias([...categorias, categoria]);
+    setCategorias([...categorias, values]);
     clearForm();
   };
 
@@ -45,24 +45,24 @@ function CadastroCategoria() {
           label="Título da Categoria"
           type="text"
           name="titulo"
-          value={categoria.titulo}
-          onChange={handleCategoria}
+          value={values.titulo}
+          onChange={handleChange}
         />
 
         <FormField
           label="Descrição"
           type="textarea"
           name="descricao"
-          value={categoria.descricao}
-          onChange={handleCategoria}
+          value={values.descricao}
+          onChange={handleChange}
         />
 
         <FormField
           label="Cor"
           type="color"
           name="cor"
-          value={categoria.cor}
-          onChange={handleCategoria}
+          value={values.cor}
+          onChange={handleChange}
         />
 
         <Button to="#">

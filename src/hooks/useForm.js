@@ -3,7 +3,7 @@ import { useState } from 'react';
 function useForm(valoresIniciais) {
   const [values, setValues] = useState(valoresIniciais);
 
-  const handleCategoria = (event) => {
+  const handleChanges = (event) => {
     const { target } = event;
     const chave = target.getAttribute('name');
     const valor = target.value;
@@ -18,7 +18,7 @@ function useForm(valoresIniciais) {
     setValues(valoresIniciais);
   };
 
-  return { categoria: values, handleCategoria, clearForm };
+  return { values, handleChanges, clearForm };
 }
 
 export default useForm;
